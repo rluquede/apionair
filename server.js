@@ -5,7 +5,7 @@ const stripe = new Stripe("sk_test_51L2c6FCd5ojOmmEHLM9agMxpSGTEs1yvcxXqOvu1XQrQ
 
 const app = express();
 var corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "*",
 };
 
 app.use(cors(corsOptions));
