@@ -1,4 +1,3 @@
-const res = require("express/lib/response");
 const Entrada = require("../models/entradas.model.js");
 
 exports.create = (req, res) => {

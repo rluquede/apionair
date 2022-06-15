@@ -1,4 +1,3 @@
-const res = require("express/lib/response");
 const Evento = require("../models/eventos.model.js");
 
 exports.create = (req, res) => {
@@ -8,7 +7,6 @@ exports.create = (req, res) => {
     });
   }
   const evento = req.body.evento;
-  console.log(evento);
   Evento.create(evento, (err, data) => {
     if (err) {
       res.status(500).send({

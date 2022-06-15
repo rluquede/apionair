@@ -10,6 +10,7 @@ const Evento = function (evento) {
   this.imgUrl = evento.imgUrl;
 };
 
+//Crear el evento
 Evento.create = (newEvento, result) => {
   sql.query("INSERT INTO eventos SET ?", [newEvento], (err, res) => {
     if (err) {
@@ -21,7 +22,7 @@ Evento.create = (newEvento, result) => {
     result(null, { id: res.insertId, ...newEvento });
   });
 };
-
+//Obtener todos los eventos
 Evento.getAll = (result) => {
   let query = "SELECT * FROM eventos ORDER BY fechaInicio DESC";
   sql.query(query, (err, res) => {
@@ -34,7 +35,7 @@ Evento.getAll = (result) => {
     result(null, res);
   });
 };
-
+//Obtener el evento por ID
 Evento.findById = (id, result) => {
   sql.query(`SELECT * FROM eventos WHERE id = ${id}`, (err, res) => {
     if (err) {
@@ -50,7 +51,7 @@ Evento.findById = (id, result) => {
     result({ kind: "not_found" }, null);
   });
 };
-
+//Actualizar el Evento por ID
 Evento.updateById = (id, evento, result) => {
   sql.query(
     "UPDATE eventos SET titulo = ?, lugar = ?, fechaInicio = ?,fechaFin = ?, stock = ?, precio = ?, imgUrl = ? WHERE id = ?",
@@ -79,7 +80,7 @@ Evento.updateById = (id, evento, result) => {
     }
   );
 };
-
+//Actualizar el numero de stock de entradas de un evento por ID
 Evento.compraEntrada = (id, numeroEntradas, result) => {
   sql.query(
     "UPDATE eventos SET stock = ? WHERE id = ?",
@@ -99,7 +100,7 @@ Evento.compraEntrada = (id, numeroEntradas, result) => {
     }
   );
 };
-
+//Borrar un evento por ID
 Evento.remove = (id, result) => {
   sql.query("DELETE FROM eventos WHERE id = ?", id, (err, res) => {
     if (err) {

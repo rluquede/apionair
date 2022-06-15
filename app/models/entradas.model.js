@@ -7,6 +7,7 @@ const Entrada = function(entrada){
     this.email = entrada.email
 }
 
+//Crear entrada
 Entrada.create = (newEntrada, result)=>{
     sql.query("INSERT INTO entradas SET ?", [newEntrada], (err,res)=>{
         if (err) {
@@ -18,7 +19,7 @@ Entrada.create = (newEntrada, result)=>{
           result(null, {...newEntrada });
     })
 }
-
+//Obtener entrada por usuario
 Entrada.getAllByUser = (id, result)=>{
     sql.query(`SELECT * FROM entradas WHERE userId = '${id}'`,(err,res)=>{
         if (err) {
@@ -34,7 +35,7 @@ Entrada.getAllByUser = (id, result)=>{
           result({ kind: "not_found" }, null);
     })
 }
-
+//obtener una entrada por usuarioId y eventoId
 Entrada.getEntrada = (id,eventoId, result)=>{
   sql.query(`SELECT * FROM entradas WHERE userId = '${id}' AND eventoId = '${eventoId}'`,(err,res)=>{
       if (err) {
@@ -50,8 +51,7 @@ Entrada.getEntrada = (id,eventoId, result)=>{
         result(null, false);
   })
 }
-
-
+//Actualizar entrada
 Entrada.updateEntrada = (userId, eventoId, numeroEntradas, result)=>{
     sql.query(`UPDATE entradas SET numeroEntradas = ? WHERE userId = ? AND eventoId = ?`,
     [numeroEntradas, userId, eventoId], (err,res)=>{
@@ -68,7 +68,7 @@ Entrada.updateEntrada = (userId, eventoId, numeroEntradas, result)=>{
           result(null, eventoId);
     })
 } 
-
+//Borrar entrada
 Entrada.remove = (userId,eventoId, result) => {
     sql.query(`DELETE FROM entradas WHERE userId = ? AND eventoId = ?`,[userId, eventoId],(err,res)=>{
         if (err) {
